@@ -1,4 +1,5 @@
-import { createConnection } from "./index";
+import { createConnection } from "./index.js";
+
 async function updateMovieByName(name, request) {
   const client = await createConnection();
   const result = await client
