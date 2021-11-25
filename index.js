@@ -109,7 +109,7 @@ console.log("Mongodb Connected")
 
 return client;
 }
- const client = await createConnection();
+ export const client = await createConnection();
 
 
 app.get("/", (request, response) => {
