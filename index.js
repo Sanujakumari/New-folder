@@ -3,13 +3,7 @@ import dotenv from "dotenv" ;
 
 import express from "express";
 import { MongoClient } from "mongodb";
-import { getMovieByName,
-  deleteMovieById,
-  deleteByQuery,
-  getMovieById,
-  createMovie,
-  getMovieByQuery,
-  updateMovieByName} from "./helper.js";
+
 import { movieRouter } from "./routes/movie.js";
 dotenv.config();
 console.log(process.env)
@@ -34,7 +28,7 @@ app.get("/", (request, response) => {
   response.send("Hello world  🌎");
 });
 
-app.use('/movies',movieRouter);
+// app.use('/movies',movieRouter);
 
 
 app.listen(PORT, () => console.log("The server is started in ", PORT));
