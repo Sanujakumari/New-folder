@@ -1,7 +1,6 @@
 import { client } from "./index.js";
 
 async function updateMovieByName(name, request) {
-//  const client = await createConnection();
   const result = await client
     .db("b27rwd")
     .collection("movies")
@@ -10,7 +9,6 @@ async function updateMovieByName(name, request) {
 }
 
 async function getMovieByName(name) {
-//  const client = await createConnection();
 
   return await client
     .db("b27rwd")
@@ -19,7 +17,6 @@ async function getMovieByName(name) {
 }
 
 async function getMovieByQuery(filter) {
-//  const client = await createConnection();
   const movies = await client
     .db("b27rwd")
     .collection("movies")
@@ -29,7 +26,6 @@ async function getMovieByQuery(filter) {
 }
 
   async function createMovie(data) {
-//  const client = await createConnection();
   console.log(data);
   const result = await client
     .db("b27rwd")
@@ -38,8 +34,7 @@ async function getMovieByQuery(filter) {
   return result;
 }
 async function getMovieById(id) {
-  //  const client = await createConnection();
-    const movie = await client
+      const movie = await client
       .db("b27rwd")
       .collection("movies")
       .findOne({ id: id });
@@ -47,8 +42,7 @@ async function getMovieById(id) {
   }
   
   async function deleteByQuery(filter) {
-  //  const client = await createConnection();
-    const deletequery = await client
+      const deletequery = await client
       .db("b27rwd")
       .collection("movies")
       .deleteMany(filter);
@@ -56,8 +50,7 @@ async function getMovieById(id) {
   }
   
   async function deleteMovieById(id) {
-  //  const client = await createConnection();
-    const delmovie = await client
+      const delmovie = await client
       .db("b27rwd")
       .collection("movies")
       .deleteMany({ id: id });

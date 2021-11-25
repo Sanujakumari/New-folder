@@ -10,6 +10,7 @@ import { getMovieByName,
   createMovie,
   getMovieByQuery,
   updateMovieByName} from "./helper.js";
+import { movieRouter } from "./routes/movie.js";
 dotenv.config();
 console.log(process.env)
 const app = express();
@@ -109,79 +110,20 @@ console.log("Mongodb Connected")
 
 return client;
 }
- export const client = await createConnection();
+  const client = await createConnection();
 
 
 app.get("/", (request, response) => {
   response.send("Hello world  🌎");
 });
-app.get("/movies", async(request, response) => {
-   console.log(request.query);
-   let filter=request.query;
-  
-   if(filter.rating){
-     filter.rating=parseInt(filter.rating);
-   }
-   console.log(filter)
 
-   const movies = await getMovieByQuery(filter);
-  //  console.log(movies)
-   response.send(movies)
-
-   //Query is for filtering
-  //  const movlang=movies.filter((mv)=>mv.language===language)
-   // response.send( movlang ? movlang : {});
-  });
-  app.get("/movies/:id", async(request, response) => {
-    const {id}=request.params;
-   const movie = await getMovieById(id);
-
-response.send( movie ? movie : {message:"No matching"})
-  
-});
-app.delete("/movies", async(request, response) => {
-  console.log(request.query);
-  let filter=request.query;
- 
-  if(filter.rating){
-    filter.rating=parseInt(filter.rating);
-  }
-  console.log(filter)
-
-  const deletequery = await deleteByQuery(filter);
-  response.send(deletequery)
- });
-app.delete("/movies/:id", async(request, response) => {
-  const {id}=request.params;
- const delmovie = await deleteMovieById(id);
-
-response.send( delmovie ? delmovie : {message:"No matching"})
-
-});
-app.put("/movies", async(request, response) => {
-  const {name}=request.query;
-  console.log(request.query, request.body);
-  const client = await updateMovieByName(name, request);
-
-  const movie = await getMovieByName(name);
-response.send(movie);
-
-});
-
-app.post("/movies", async(request, response) => {
-const data=request.body;
-  const result = await createMovie(data);
-
-response.send(result )
-
-});
-
+app.use('/movies',movieRouter);
 
 
 app.listen(PORT, () => console.log("The server is started in ", PORT));
 
 
-
+export {client}
 
 
 
