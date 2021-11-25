@@ -28,7 +28,7 @@ app.get("/", (request, response) => {
   response.send("Hello world  🌎");
 });
 
-// app.use('/movies',movieRouter);
+app.use('/movies',movieRouter);
 
 
 app.listen(PORT, () => console.log("The server is started in ", PORT));
