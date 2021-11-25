@@ -1,15 +1,15 @@
 // const express = require("express");
 import dotenv from "dotenv" ;
 
-import express from "express"
-import { MongoClient } from "mongodb"
+import express from "express";
+import { MongoClient } from "mongodb";
 import { getMovieByName,
   deleteMovieById,
   deleteByQuery,
   getMovieById,
   createMovie,
   getMovieByQuery,
-  updateMovieByName} from "./helper.js"
+  updateMovieByName} from "./helper.js";
 dotenv.config();
 console.log(process.env)
 const app = express();
@@ -102,14 +102,14 @@ const PORT = 9000;
 const MONGO_URL=process.env.MONGO_URL;
 // const MONGO_URL="mongodb://localhost"
 
-export async function createConnection(){
+ async function createConnection(){
   const client=new MongoClient(MONGO_URL);
 await client.connect()
 console.log("Mongodb Connected")
 
 return client;
 }
-createConnection();
+ const client = await createConnection();
 
 
 app.get("/", (request, response) => {
@@ -133,7 +133,7 @@ app.get("/movies", async(request, response) => {
    // response.send( movlang ? movlang : {});
   });
   app.get("/movies/:id", async(request, response) => {
-    const {id}=request.params
+    const {id}=request.params;
    const movie = await getMovieById(id);
 
 response.send( movie ? movie : {message:"No matching"})
@@ -152,7 +152,7 @@ app.delete("/movies", async(request, response) => {
   response.send(deletequery)
  });
 app.delete("/movies/:id", async(request, response) => {
-  const {id}=request.params
+  const {id}=request.params;
  const delmovie = await deleteMovieById(id);
 
 response.send( delmovie ? delmovie : {message:"No matching"})
@@ -163,8 +163,7 @@ app.put("/movies", async(request, response) => {
   console.log(request.query, request.body);
   const client = await updateMovieByName(name, request);
 
-  const movie = await getMovieByName(client, name);
-  return movie;
+  const movie = await getMovieByName(name);
 response.send(movie);
 
 });
