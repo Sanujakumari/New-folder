@@ -1,4 +1,5 @@
 import { client } from "./index.js";
+import bcrypt from "bcrypt"
 
 async function updateMovieByName(name, request) {
   const result = await client
@@ -56,6 +57,12 @@ async function getMovieById(id) {
       .deleteMany({ id: id });
     return delmovie;
   }
+  async function genPassword(password){
+    const salt=await bcrypt.genSalt(10);
+  // console.log(salt);
+    const hashedPassword=await bcrypt.hash(password,salt)
+  return hashedPassword
+  }
 
   export{
     getMovieByName,
@@ -64,5 +71,6 @@ async function getMovieById(id) {
     getMovieById,
     createMovie,
     getMovieByQuery,
-    updateMovieByName
+    updateMovieByName,
+    genPassword
   }

@@ -5,6 +5,8 @@ import express from "express";
 import { MongoClient } from "mongodb";
 
 import { movieRouter } from "./routes/movie.js";
+import { userRouter } from "./routes/users.js";
+import bcrypt from "bcrypt"
 import cors from "cors";
 
 dotenv.config();
@@ -32,6 +34,7 @@ app.get("/", (request, response) => {
 });
 
 app.use('/movies',movieRouter);
+app.use('/users',userRouter);
 
 
 app.listen(PORT, () => console.log("The server is started in ", PORT));
@@ -39,5 +42,10 @@ app.listen(PORT, () => console.log("The server is started in ", PORT));
 
 export {client}
 
-
-
+async function genPassword(password){
+  const salt=await bcrypt.genSalt(10);
+console.log(salt);
+  const hashedPassword=await bcrypt.hash(password,salt)
+console.log(hashedPassword)
+}
+genPassword("password123")
