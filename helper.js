@@ -63,7 +63,20 @@ async function getMovieById(id) {
     const hashedPassword=await bcrypt.hash(password,salt)
   return hashedPassword
   }
+  async function getUserByName(username) {
 
+    return await client
+      .db("b27rwd")
+      .collection("users")
+      .findOne({ username: username });
+  }
+  async function createUser(data) {
+    const result = await client
+      .db("b27rwd")
+      .collection("users")
+      .insertOne(data);
+    return result;
+  }
   export{
     getMovieByName,
     deleteMovieById,
@@ -72,5 +85,7 @@ async function getMovieById(id) {
     createMovie,
     getMovieByQuery,
     updateMovieByName,
-    genPassword
+    genPassword,
+    getUserByName,
+    createUser
   }
