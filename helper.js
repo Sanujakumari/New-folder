@@ -1,5 +1,5 @@
 import { client } from "./index.js";
-import bcrypt from "bcrypt"
+import bcrypt from "bcrypt";
 
 async function updateMovieByName(name, request) {
   const result = await client

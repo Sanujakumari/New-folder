@@ -6,7 +6,7 @@ import { MongoClient } from "mongodb";
 
 import { movieRouter } from "./routes/movie.js";
 import { userRouter } from "./routes/users.js";
-import bcrypt from "bcrypt"
+import bcrypt from "bcrypt";
 import cors from "cors";
 
 dotenv.config();
